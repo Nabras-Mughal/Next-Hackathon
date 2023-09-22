@@ -11,8 +11,6 @@ import {
 import Link from "next/link";
 
 export default function CardComponent({ content }) {
-
-
   // console.log(content);
   // useState hooks //
 
@@ -47,7 +45,6 @@ export default function CardComponent({ content }) {
     // console.log(AccountDetails);
   }
 
-
   return (
     <>
       <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -62,5 +59,4 @@ export default function CardComponent({ content }) {
       </Grid>
     </>
   );
-
-  
+}
