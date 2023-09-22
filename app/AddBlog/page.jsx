@@ -11,37 +11,29 @@ export default function Page() {
     title: "",
     description: "",
     author: "",
-    date: Date,
+    date: null,
   });
   const { title, description } = blog;
 
-  useEffect(() => {
-    setBlog({ ...blog, author: _id, date: postingDate });
-  }, []);
-
   let user_ID = localStorage.getItem("userCredentials");
   user_ID = JSON.parse(user_ID);
-  const {
-    userDetails: { _id },
-  } = user_ID;
-
-  // console.log(_id);
 
   let postingDate = new Date();
   postingDate.toISOString();
-  // console.log();
-  //async
-
-  // if (_id !== null) {
-  // }
 
   const handleSubmit = async (event) => {
-    // console.log(`Blog : ${JSON.stringify(blog, null, 2)}`);
+    if (user_ID && user_ID._id) {
+      setBlog({ ...blog, author: user_ID._id, date: postingDate });
+    }
+
     let addBlog = await fetch("http://localhost:3000/BlogAdd", {
       method: "POST",
       body: JSON.stringify(blog),
     });
     addBlog = await addBlog.json();
+
+    // console.log(`Blog : ${JSON.stringify(blog, null, 2)}`);
+    //
     event.preventDefault();
     // await router.push("/Blog");
   };

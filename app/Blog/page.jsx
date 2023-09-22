@@ -63,7 +63,7 @@ export default function Page() {
               href="/AddBlog"
               className="py-2 px-1 bg-red-200 mr-4 font-semibold rounded-md"
             >
-              Add Blog
+               Add Blog
             </Link>
           </Box>
         </Box>

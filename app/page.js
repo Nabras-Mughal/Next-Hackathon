@@ -31,6 +31,9 @@ export default function Home() {
   const [searchBlog, setsearchBlog] = useState("");
   let APIkey = `http://localhost:3000/BlogAdd`;
 
+
+  console.log(searchBlog);
+
   useEffect(() => {
     fetch(APIkey, { cache: "no-cache" })
       .then((response) => response.json())
@@ -43,46 +46,28 @@ export default function Home() {
   let accountUser = localStorage.getItem("userCredentials");
   let parsedData = JSON.parse(accountUser);
 
-  // console.log(`Account user : ${JSON.stringify(accountUser, null, 2)}`);
-  useEffect(() => {
+    useEffect(() => {
     if (parsedData) {
       setIsAuth(true);
     }
   }, [parsedData]);
-  console.log(`Auth State : ${isAuth}`);
-
+  
   useEffect(() => {
-    // Filter blogs by author's _id
-
+  
     if (blogsData && parsedData) {
-      // blogsData.BlogGET
       const userBlogsFiltered = blogsData.BlogGET.filter(
         (blog) => blog.author === parsedData._id
       );
       setUserBlogs(userBlogsFiltered);
 
-      // console.log(userBlogsFiltered);
-
-      // // Filter other blogs
       const otherBlogsFiltered = blogsData.BlogGET.filter(
         (blog) => blog.author !== parsedData._id
       );
-      console.log(otherBlogsFiltered);
 
       setOtherBlogs(otherBlogsFiltered);
 
-      // Set all blogs
-      // console.log(blogsData.BlogGET);
-
-      // setBlogs(blogsData);
     }
   }, [blogsData]);
-  // if (accountUser) {
-  //   // acountUserID = accountUser
-  //   console.log(JSON.parse(accountUser));
-  // }
-
-  console.log(parsedData);
 
   let AccountDetails = parsedData;
 
@@ -115,7 +100,7 @@ export default function Home() {
               <Login />
             ) : (
               <>
-                <AvatarMenu />
+                <AvatarMenu AccountDetails={AccountDetails} />
               </>
             )}
           </Box>

@@ -4,10 +4,11 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useRouter } from "next/navigation";
 
-export default function AvatarMenu() {
+export default function AvatarMenu({ AccountDetails }) {
   let router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
 
+  console.log(AccountDetails);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -19,6 +20,11 @@ export default function AvatarMenu() {
   const DashboardHandler = (event) => {
     router.push("/Blog");
     console.log(event.target.value);
+    setAnchorEl(null);
+  };
+
+  const viewProfileHandler = (event) => {
+    router.push(`/ViewProfile/${AccountDetails._id}`);
     setAnchorEl(null);
   };
 
@@ -47,12 +53,9 @@ export default function AvatarMenu() {
         onClose={handleClose}
       >
         <MenuItem onClick={DashboardHandler}>Dashboard</MenuItem>
-        {/* <MenuItem onClick={handleClose}>Option 2</MenuItem> */}
+        <MenuItem onClick={viewProfileHandler}>View Profile</MenuItem>
         <MenuItem onClick={logoutHandler}>Log Out</MenuItem>
       </Menu>
     </div>
   );
 }
-
-// const AvatarDropdown = () => {
-//   };
